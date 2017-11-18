@@ -1,0 +1,59 @@
+version: '3.3' 
+services:
+  scrapyd:
+    image: vimagick/scrapyd
+    ports:
+      - "6800:6800"
+    volumes:
+      - ./scrapyd_data:/var/lib/scrapyd
+      - ./scrapy_app:/code
+    working_dir: /code
+    links:
+      - splash
+      - postgres
+    depends_on:
+          - postgres
+          - splash
+    restart: always
+
+  splash:
+    image: scrapinghub/splash
+    ports:
+      - "5023:5023"
+      - "8050:8050"
+      - "8051:8051"
+    restart: always
+
+  postgres:
+    restart: always
+    image: sameersbn/postgresql:9.6-2
+    ports:
+      - "5432:5432"
+    environment:
+      - DEBUG=false
+      - DB_USER=
+      - DB_PASS=
+      - DB_NAME=
+    volumes:
+      - ./postgres_data:/var/lib/postgresql
+
+  rabbit:
+      hostname: rabbit
+      image: rabbitmq:latest
+      environment:
+          - RABBITMQ_DEFAULT_USER=admin
+          - RABBITMQ_DEFAULT_PASS=mypass
+      ports:
+          - "5672:5672"
+
+  celery:
+      build:
+          context: ./celery_app
+          dockerfile: celery_dockerfile
+      volumes:
+          - ./celery_app:/app
+      links:
+          - rabbit
+          - scrapyd
+      depends_on:
+          - rabbit
