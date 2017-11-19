@@ -16,7 +16,7 @@ def setup_periodic_tasks(sender, **kwargs):
         #     crontab(hour=7, minute=30),
         #     crawl_playlist.s(playlist),
         # )
-        sender.add_periodic_task(100.0, crawl_playlist.s(playlist), name='crawl every 10')
+        sender.add_periodic_task(3600.0, crawl_playlist.s(playlist), name='crawl every 10')
 
 
 
