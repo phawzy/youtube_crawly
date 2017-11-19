@@ -101,4 +101,5 @@ ENV/
 .mypy_cache/
 
 
-postgres_data/*
+mongo_data/*
+scrapyd_data/*

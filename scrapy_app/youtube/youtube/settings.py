@@ -103,4 +103,15 @@ DOWNLOADER_MIDDLEWARES = {
 SPLASH_URL = 'http://splash:8050'
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
-ROBOTSTXT_OBEY=False
+ROBOTSTXT_OBEY = False
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+IMAGES_STORE = '/images'
+
+ITEM_PIPELINES = {
+    'youtube.pipelines.MongoDBPipeline': 300,
+}
+
+MONGODB_SERVER = "mongodb"
+MONGODB_PORT = 27017
+MONGODB_DB = "youtube_scrapy"
+MONGODB_COLLECTION = "videos"

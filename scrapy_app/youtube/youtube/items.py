@@ -10,9 +10,9 @@ import scrapy
 
 class YoutubeItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    vid = scrapy.Field()
-    author_id = scrapy.Field()
+    url = scrapy.Field()
     title = scrapy.Field()
-    description = scrapy.Field()
-    time = scrapy.Field()
+    duration = scrapy.Field()
+    views = scrapy.Field()
+    thumbnail_url = scrapy.Field()
+    images_url = scrapy.Field()
