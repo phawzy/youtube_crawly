@@ -36,7 +36,7 @@ sudo docker-compose up --build -d --remove-orphans
 
 * Celery: Scheduling the spiders instances to run periodically
 
-* Rabbitmq: Message broker for celery
+* Rabbitmq: Message broker for celery .
 
 
 ### Current State
